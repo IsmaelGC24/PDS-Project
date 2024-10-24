@@ -1,0 +1,117 @@
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class MyPanel extends JPanel implements ActionListener {
+    private JLabel lblMapa;
+    private JLabel lblWelcome;
+    private JButton btnBuscarC;
+    private JButton btnBuscarD;
+    private JButton btnBuscarM;
+    private JButton btnInfo;
+    private JComboBox<String> buttonsBloques;
+    private JLabel lblSelectLocation;
+    private JButton btnColorsInfo;
+    private JButton btnReciclaje;
+
+    public MyPanel() {
+        String[] buttonsBloquesItems = {"Bloque idiomas", "Bloque 38", "Bloque 33", "Bloque 34", "Bloque 35", "Bloque 29", "Bloque 18", "Bloque 19", "Bloque 26", "Bloque 27"};
+
+        lblMapa = new JLabel("                                                                  Mapa Eafit");
+        lblWelcome = new JLabel("            ¡Bienvenido!");
+        btnBuscarC = new JButton("Buscar Canecas");
+        btnBuscarD = new JButton("Buscar Dispensadores");
+        btnBuscarM = new JButton("Buscar Máquinas");
+        btnInfo = new JButton("Otra Información");
+        buttonsBloques = new JComboBox<>(buttonsBloquesItems);
+        lblSelectLocation = new JLabel("Selecciona Ubicación...");
+        btnColorsInfo = new JButton("Colores de canecas");
+        btnReciclaje = new JButton("Info Reciclaje");
+
+        // actionListeners para los botones
+        btnBuscarC.addActionListener(this);
+        btnBuscarD.addActionListener(this);
+        btnBuscarM.addActionListener(this);
+        btnInfo.addActionListener(this);
+        btnColorsInfo.addActionListener(this);
+        btnReciclaje.addActionListener(this);
+
+        setPreferredSize(new Dimension(669, 394));
+        setLayout(null);
+
+        add(lblMapa);
+        add(lblWelcome);
+        add(btnBuscarC);
+        add(btnBuscarD);
+        add(btnBuscarM);
+        add(btnInfo);
+        add(buttonsBloques);
+        add(lblSelectLocation);
+        add(btnColorsInfo);
+        add(btnReciclaje);
+
+        lblMapa.setBounds(10, 60, 470, 260);
+        lblWelcome.setBounds(250, 0, 140, 55);
+        btnBuscarC.setBounds(10, 335, 160, 40);
+        btnBuscarD.setBounds(180, 335, 165, 40);
+        btnBuscarM.setBounds(355, 335, 140, 40);
+        btnInfo.setBounds(505, 260, 135, 35);
+        buttonsBloques.setBounds(510, 85, 95, 25);
+        lblSelectLocation.setBounds(510, 55, 145, 25);
+        btnColorsInfo.setBounds(490, 175, 170, 40);
+        btnReciclaje.setBounds(505, 220, 135, 35);
+    }
+
+    // manejador los clics de los botones
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String bloqueSeleccionado = (String) buttonsBloques.getSelectedItem();
+
+        if (e.getSource() == btnBuscarC) {
+            buscarCanecas(bloqueSeleccionado);
+        } else if (e.getSource() == btnBuscarD) {
+            buscarDispensadores(bloqueSeleccionado);
+        } else if (e.getSource() == btnBuscarM) {
+            buscarMaquinas(bloqueSeleccionado);
+        } else if (e.getSource() == btnInfo) {
+            mostrarOtraInformacion();
+        } else if (e.getSource() == btnColorsInfo) {
+            mostrarColoresCanecas();
+        } else if (e.getSource() == btnReciclaje) {
+            mostrarInfoReciclaje();
+        }
+    }
+
+    // metodos para cada botón, con el bloque seleccionado
+    private void buscarCanecas(String bloque) {
+        JOptionPane.showMessageDialog(this, "Buscando canecas cercanas a " + bloque);
+    }
+
+    private void buscarDispensadores(String bloque) {
+        JOptionPane.showMessageDialog(this, "Buscando dispensadores cercanos a " + bloque);
+    }
+
+    private void buscarMaquinas(String bloque) {
+        JOptionPane.showMessageDialog(this, "Buscando máquinas cercanas a " + bloque);
+    }
+
+    private void mostrarOtraInformacion() {
+        JOptionPane.showMessageDialog(this, "Mostrando otra información...");
+    }
+
+    private void mostrarColoresCanecas() {
+        JOptionPane.showMessageDialog(this, "Mostrando colores de canecas...");
+    }
+
+    private void mostrarInfoReciclaje() {
+        JOptionPane.showMessageDialog(this, "Mostrando información de reciclaje...");
+    }
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("MyPanel");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().add(new MyPanel());
+        frame.pack();
+        frame.setVisible(true);
+    }
+}
